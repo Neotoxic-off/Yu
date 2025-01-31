@@ -1,0 +1,21 @@
+{
+    "manifest_version": 3,
+    "name": "Yu",
+    "version": "1.0",
+    "description": "Unlock youtube from unwanted elements",
+    "permissions": [
+        "activeTab"
+    ],
+    "host_permissions": [
+        "*://*.youtube.com/*"
+    ],
+    "content_scripts": [
+        {
+            "matches": ["*://*.youtube.com/*"],
+            "js": ["dist/bundle.js"]
+        }
+    ],
+    "icons": {
+        "96": "icons/96.png"
+    }
+}
