@@ -15,6 +15,14 @@
 - **Sign YouTube:** Remove YouTube red color and replace it
 - **Tabs content:** Remove tab left content to keep it minimal
 
+## Showcase
+|                           |                           |
+|:-------------------------:|:-------------------------:|
+| <img src="img/youtube-1.jpg"/> | <img src="img/youtube-2.jpg"/> |
+| <img src="img/youtube-3.jpg"/> | <img src="img/youtube-4.jpg"/> |
+|                           |                           |
+
+
 ## Build on linux / macos
 - npm version: 9.7.2
 - npx version: 9.7.2
