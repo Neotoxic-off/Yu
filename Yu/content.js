@@ -5,6 +5,7 @@ import { removeFeedBar } from './modules/remove-feed-bar.js'
 import { removeVideoPreview } from './modules/remove-video-preview.js'
 import { sign } from './modules/sign.js'
 import { removeSearchVoice } from './modules/remove-search-voice.js'
+import { removeTabsContent } from './modules/remove-tabs-content.js'
 
 const observer = new MutationObserver(() => {
     removePaidContent();
@@ -15,6 +16,7 @@ const observer = new MutationObserver(() => {
     removeVideoPreview();
     sign();
     removeSearchVoice();
+    removeTabsContent();
 });
 
 observer.observe(document.body, {

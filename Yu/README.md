@@ -13,6 +13,7 @@
 - **Video preview:** Remove video preview
 - **End video promotion:** Remove content promotion at the end
 - **Sign YouTube:** Remove YouTube red color and replace it
+- **Tabs content:** Remove tab left content to keep it minimal
 
 ## Build on linux / macos
 - npm version: 9.7.2

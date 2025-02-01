@@ -1,6 +1,5 @@
 {
     "manifest_version": 3,
-    "update_url": "https://github.com/Neotoxic-off/Yu/",
     "name": "Yu",
     "version": "1.0",
     "description": "Unlock YouTube from unwanted elements",
