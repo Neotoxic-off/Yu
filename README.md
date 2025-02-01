@@ -13,9 +13,14 @@
 - **Video preview:** Remove video preview
 - **End video promotion:** Remove content promotion at the end
 - **Sign YouTube:** Remove YouTube red color and replace it
+- **Tabs content:** Remove tab left content to keep it minimal
 
-## Build
+## Build on linux / macos
+- npm version: 9.7.2
+- npx version: 9.7.2
+
 ```bash
+npm i
 npx webpack
 ```
 
@@ -28,4 +33,3 @@ Feel free to open issues or submit pull requests to improve the extension!
 
 ## License
 This project is licensed under the [MIT License](https://github.com/Neotoxic-off/Yu/blob/main/LICENSE).
-
