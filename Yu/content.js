@@ -3,7 +3,8 @@ import { removePaidContent } from './modules/remove-paid-content.js';
 import { removeEndPromotion } from './modules/remove-end-promotion.js';
 import { removeFeedBar } from './modules/remove-feed-bar.js'
 import { removeVideoPreview } from './modules/remove-video-preview.js'
-import { replaceSearchPlaceholder } from './modules/replace-search-placeholder.js'
+import { sign } from './modules/sign.js'
+import { removeSearchVoice } from './modules/remove-search-voice.js'
 
 const observer = new MutationObserver(() => {
     removePaidContent();
@@ -12,7 +13,8 @@ const observer = new MutationObserver(() => {
     removeShortEmbeded();
     removeFeedBar();
     removeVideoPreview();
-    replaceSearchPlaceholder();
+    sign();
+    removeSearchVoice();
 });
 
 observer.observe(document.body, {
