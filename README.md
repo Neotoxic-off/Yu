@@ -1,7 +1,7 @@
 # Yu
 🔓 Youtube Unlocker
 
-[![Firefox Add-on](https://img.shields.io/amo/v/YOUR_EXTENSION_ID?label=Firefox%20Add-on)](https://addons.mozilla.org/en-US/firefox/addon/YOUR_EXTENSION_ID/)
+[![Firefox Add-on](https://img.shields.io/amo/v/youtube-unlocker-yu?label=Firefox%20Add-on)](https://addons.mozilla.org/en-US/firefox/addon/youtube-unlocker-yu/)
 [![License](https://img.shields.io/github/license/Neotoxic-off/Yu)](https://github.com/Neotoxic-off/Yu/blob/main/LICENSE)
 [![Issues](https://img.shields.io/github/issues/Neotoxic-off/Yu)](https://github.com/Neotoxic-off/Yu/issues)
 [![Last Commit](https://img.shields.io/github/last-commit/Neotoxic-off/Yu)](https://github.com/Neotoxic-off/Yu/commits/main)
@@ -33,7 +33,7 @@ npx webpack
 ```
 
 ## Installation
-1. Download the latest version from [Firefox Add-ons](https://addons.mozilla.org/en-US/firefox/addon/YOUR_EXTENSION_ID/).
+1. Download the latest version from [Firefox Add-ons](https://addons.mozilla.org/en-US/firefox/addon/youtube-unlocker-yu/).
 2. Load the extension in Firefox via `about:addons`.
 
 ## Contributing
