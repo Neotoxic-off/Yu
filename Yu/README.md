@@ -1,35 +1,53 @@
-# Yu
-🔓 Youtube Unlocker
+# Next.js & HeroUI Template
 
-[![Firefox Add-on](https://img.shields.io/amo/v/YOUR_EXTENSION_ID?label=Firefox%20Add-on)](https://addons.mozilla.org/en-US/firefox/addon/YOUR_EXTENSION_ID/)
-[![License](https://img.shields.io/github/license/Neotoxic-off/Yu)](https://github.com/Neotoxic-off/Yu/blob/main/LICENSE)
-[![Issues](https://img.shields.io/github/issues/Neotoxic-off/Yu)](https://github.com/Neotoxic-off/Yu/issues)
-[![Last Commit](https://img.shields.io/github/last-commit/Neotoxic-off/Yu)](https://github.com/Neotoxic-off/Yu/commits/main)
+This is a template for creating applications using Next.js 14 (app directory) and HeroUI (v2).
 
-## Features
-- **Shorts:** Remove all integration of YouTube Shorts
-- **Paid content:** Remove paid content from video selection
-- **Feed bar:** Remove feed bar
-- **Video preview:** Remove video preview
-- **End video promotion:** Remove content promotion at the end
-- **Sign YouTube:** Remove YouTube red color and replace it
-- **Tabs content:** Remove tab left content to keep it minimal
+[Try it on CodeSandbox](https://githubbox.com/heroui-inc/heroui/next-app-template)
 
-## Build on linux / macos
-- npm version: 9.7.2
-- npx version: 9.7.2
+## Technologies Used
+
+- [Next.js 14](https://nextjs.org/docs/getting-started)
+- [HeroUI v2](https://heroui.com/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [Tailwind Variants](https://tailwind-variants.org)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Framer Motion](https://www.framer.com/motion/)
+- [next-themes](https://github.com/pacocoursey/next-themes)
+
+## How to Use
+
+### Use the template with create-next-app
+
+To create a new project based on this template using `create-next-app`, run the following command:
 
 ```bash
-npm i
-npx webpack
+npx create-next-app -e https://github.com/heroui-inc/next-app-template
 ```
 
-## Installation
-1. Download the latest version from [Firefox Add-ons](https://addons.mozilla.org/en-US/firefox/addon/YOUR_EXTENSION_ID/).
-2. Load the extension in Firefox via `about:addons`.
+### Install dependencies
 
-## Contributing
-Feel free to open issues or submit pull requests to improve the extension!
+You can use one of them `npm`, `yarn`, `pnpm`, `bun`, Example using `npm`:
+
+```bash
+npm install
+```
+
+### Run the development server
+
+```bash
+npm run dev
+```
+
+### Setup pnpm (optional)
+
+If you are using `pnpm`, you need to add the following code to your `.npmrc` file:
+
+```bash
+public-hoist-pattern[]=*@heroui/*
+```
+
+After modifying the `.npmrc` file, you need to run `pnpm install` again to ensure that the dependencies are installed correctly.
 
 ## License
-This project is licensed under the [MIT License](https://github.com/Neotoxic-off/Yu/blob/main/LICENSE).
+
+Licensed under the [MIT license](https://github.com/heroui-inc/next-app-template/blob/main/LICENSE).
