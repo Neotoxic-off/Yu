@@ -1,10 +1,22 @@
-import React, { useState, useEffect } from "react";
-import { Button } from "@heroui/button";
-import { siteConfig } from "@/config/site";
-import { title, subtitle } from "@/components/primitives";
-import { GithubIcon } from "@/components/icons";
+"use client";
 
+import React, { useState, useEffect, useCallback, useMemo } from "react";
 import { 
+  Card, 
+  CardContent, 
+  CardHeader, 
+  CardTitle, 
+  CardDescription 
+} from "@/components/ui/card";
+import { Switch } from "@/components/ui/switch";
+import { 
+  Tooltip, 
+  TooltipContent, 
+  TooltipProvider, 
+  TooltipTrigger 
+} from "@/components/ui/tooltip";
+import { Separator } from "@/components/ui/separator";
+import {
   removeShorts,
   removeShortEmbeded,
   removePaidContent,
@@ -12,43 +24,104 @@ import {
   removeFeedBar,
   removeVideoPreview,
   removeSearchVoice,
-  removeTabsContent 
+  removeTabsContent
 } from "@/modules/remove-elements";
 
-export default function Home() {
-  // State to track whether the modules are enabled or disabled
-  const [isModuleEnabled, setIsModuleEnabled] = useState({
-    paidContent: true,
-    endPromotion: true,
-    shorts: true,
-    shortEmbeded: true,
-    feedBar: true,
-    videoPreview: true,
-    sign: true,
-    searchVoice: true,
-    tabsContent: true
-  });
+// Define the type for module keys
+type ModuleKey = keyof typeof defaultModuleState;
 
-  const handleToggle = (module) => {
+// Default state for modules
+const defaultModuleState = {
+  paidContent: true,
+  endPromotion: true,
+  shorts: true,
+  shortEmbeded: true,
+  feedBar: true,
+  videoPreview: true,
+  searchVoice: true,
+  tabsContent: true
+} as const;
+
+// Module configuration type
+interface ModuleConfig {
+  key: ModuleKey;
+  label: string;
+  description: string;
+}
+
+export default function YouTubeCleaner() {
+  // State to track whether the modules are enabled or disabled
+  const [isModuleEnabled, setIsModuleEnabled] = useState(defaultModuleState);
+
+  // Memoized module configurations to prevent unnecessary re-renders
+  const moduleConfigs: ModuleConfig[] = useMemo(() => [
+    { 
+      key: 'paidContent', 
+      label: 'Paid Content', 
+      description: 'Remove sponsored or paid video content' 
+    },
+    { 
+      key: 'endPromotion', 
+      label: 'End Promotion', 
+      description: 'Remove end-screen promotions' 
+    },
+    { 
+      key: 'shorts', 
+      label: 'Shorts', 
+      description: 'Remove YouTube Shorts from feed' 
+    },
+    { 
+      key: 'shortEmbeded', 
+      label: 'Embedded Shorts', 
+      description: 'Remove embedded Short videos' 
+    },
+    { 
+      key: 'feedBar', 
+      label: 'Feed Bar', 
+      description: 'Remove additional feed navigation elements' 
+    },
+    { 
+      key: 'videoPreview', 
+      label: 'Video Previews', 
+      description: 'Remove automatic video previews' 
+    },
+    { 
+      key: 'searchVoice', 
+      label: 'Search Voice', 
+      description: 'Remove voice search functionality' 
+    },
+    { 
+      key: 'tabsContent', 
+      label: 'Tabs Content', 
+      description: 'Remove additional content tabs' 
+    }
+  ], []);
+
+  // Memoized toggle handler to prevent unnecessary re-renders
+  const handleToggle = useCallback((module: ModuleKey) => {
     setIsModuleEnabled(prevState => ({
       ...prevState,
       [module]: !prevState[module]
     }));
-  };
+  }, []);
 
-  // Using useEffect to run the DOM manipulation code when the component mounts
+  // Effect for mutation observation with performance optimization
   useEffect(() => {
-    // Create the mutation observer to run the removal logic only if the module is enabled
+    const cleanupFunctions = [
+      { condition: isModuleEnabled.paidContent, func: removePaidContent },
+      { condition: isModuleEnabled.endPromotion, func: removeEndPromotion },
+      { condition: isModuleEnabled.shorts, func: removeShorts },
+      { condition: isModuleEnabled.shortEmbeded, func: removeShortEmbeded },
+      { condition: isModuleEnabled.feedBar, func: removeFeedBar },
+      { condition: isModuleEnabled.videoPreview, func: removeVideoPreview },
+      { condition: isModuleEnabled.searchVoice, func: removeSearchVoice },
+      { condition: isModuleEnabled.tabsContent, func: removeTabsContent }
+    ];
+
     const observer = new MutationObserver(() => {
-      if (isModuleEnabled.paidContent) removePaidContent();
-      if (isModuleEnabled.endPromotion) removeEndPromotion();
-      if (isModuleEnabled.shorts) removeShorts();
-      if (isModuleEnabled.shortEmbeded) removeShortEmbeded();
-      if (isModuleEnabled.feedBar) removeFeedBar();
-      if (isModuleEnabled.videoPreview) removeVideoPreview();
-      if (isModuleEnabled.sign) sign();
-      if (isModuleEnabled.searchVoice) removeSearchVoice();
-      if (isModuleEnabled.tabsContent) removeTabsContent();
+      cleanupFunctions.forEach(({ condition, func }) => {
+        if (condition) func();
+      });
     });
 
     // Start observing the document body for changes
@@ -61,104 +134,47 @@ export default function Home() {
     return () => {
       observer.disconnect();
     };
-  }, [isModuleEnabled]); // Effect will run when `isModuleEnabled` changes
+  }, [isModuleEnabled]);
 
   return (
-    <div>
-      {/* HeroUi Button */}
-      <Button>This is a test</Button>
-
-      {/* Toggling Modules */}
-      <div>
-        <label>
-          <input
-            type="checkbox"
-            checked={isModuleEnabled.paidContent}
-            onChange={() => handleToggle('paidContent')}
-          />
-          Enable/Disable Paid Content Removal
-        </label>
-      </div>
-      <div>
-        <label>
-          <input
-            type="checkbox"
-            checked={isModuleEnabled.endPromotion}
-            onChange={() => handleToggle('endPromotion')}
-          />
-          Enable/Disable End Promotion Removal
-        </label>
-      </div>
-      <div>
-        <label>
-          <input
-            type="checkbox"
-            checked={isModuleEnabled.shorts}
-            onChange={() => handleToggle('shorts')}
-          />
-          Enable/Disable Shorts Removal
-        </label>
-      </div>
-      <div>
-        <label>
-          <input
-            type="checkbox"
-            checked={isModuleEnabled.shortEmbeded}
-            onChange={() => handleToggle('shortEmbeded')}
-          />
-          Enable/Disable Embedded Shorts Removal
-        </label>
-      </div>
-      <div>
-        <label>
-          <input
-            type="checkbox"
-            checked={isModuleEnabled.feedBar}
-            onChange={() => handleToggle('feedBar')}
-          />
-          Enable/Disable Feed Bar Removal
-        </label>
-      </div>
-      <div>
-        <label>
-          <input
-            type="checkbox"
-            checked={isModuleEnabled.videoPreview}
-            onChange={() => handleToggle('videoPreview')}
-          />
-          Enable/Disable Video Preview Removal
-        </label>
-      </div>
-      <div>
-        <label>
-          <input
-            type="checkbox"
-            checked={isModuleEnabled.sign}
-            onChange={() => handleToggle('sign')}
-          />
-          Enable/Disable Sign Removal
-        </label>
-      </div>
-      <div>
-        <label>
-          <input
-            type="checkbox"
-            checked={isModuleEnabled.searchVoice}
-            onChange={() => handleToggle('searchVoice')}
-          />
-          Enable/Disable Search Voice Removal
-        </label>
-      </div>
-      <div>
-        <label>
-          <input
-            type="checkbox"
-            checked={isModuleEnabled.tabsContent}
-            onChange={() => handleToggle('tabsContent')}
-          />
-          Enable/Disable Tabs Content Removal
-        </label>
-      </div>
+    <div className="container mx-auto p-6 bg-background text-foreground">
+      <Card className="w-full max-w-2xl mx-auto bg-card text-card-foreground brightness-110">
+        <CardHeader>
+          <CardTitle className="text-2xl font-bold text-primary">YouTube Cleaner</CardTitle>
+          <CardDescription className="text-muted-foreground">
+            🔓 YouTube Unlocker: Keep YouTube Simple for Firefox
+          </CardDescription>
+        </CardHeader>
+        <Separator className="mb-4 bg-border" />
+        <CardContent>
+          <TooltipProvider>
+            <div className="space-y-4">
+              {moduleConfigs.map((module) => (
+                <div 
+                  key={module.key} 
+                  className="flex items-center justify-between p-3 bg-secondary/10 rounded-lg hover:bg-secondary/20 transition-colors"
+                >
+                  <div className="flex flex-col items-start">
+                    <Tooltip>
+                      <TooltipTrigger>
+                        <span className="font-medium text-foreground">{module.label}</span>
+                      </TooltipTrigger>
+                      <TooltipContent className="bg-popover text-popover-foreground">
+                        {module.description}
+                      </TooltipContent>
+                    </Tooltip>
+                    <p className="text-xs text-muted-foreground text-left">{module.description}</p>
+                  </div>
+                  <Switch
+                    checked={isModuleEnabled[module.key]}
+                    onCheckedChange={() => handleToggle(module.key)}
+                  />
+                </div>
+              ))}
+            </div>
+          </TooltipProvider>
+        </CardContent>
+      </Card>
     </div>
   );
 }
