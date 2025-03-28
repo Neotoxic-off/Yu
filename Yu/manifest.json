@@ -4,16 +4,22 @@
     "version": "1.1",
     "description": "Unlock YouTube from unwanted elements",
     "permissions": [
-      "activeTab"
+      "activeTab",
+      "storage"
+    ],
+    "action": {
+        "default_title": "Yu",
+        "default_popup": "index.html"
+    },
+    "content_scripts": [
+        {
+            "matches": ["*://*.youtube.com/*"],
+            "js": ["modules.js"],
+            "run_at": "document_start"
+        }
     ],
     "host_permissions": [
       "*://*.youtube.com/*"
-    ],
-    "content_scripts": [
-      {
-        "matches": ["*://*.youtube.com/*"],
-        "js": ["dist/bundle.js"]
-      }
     ],
     "icons": {
       "96": "icons/96.png"
