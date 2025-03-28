@@ -22,16 +22,6 @@
 | <img src="img/youtube-3.jpg"/> | <img src="img/youtube-4.jpg"/> |
 |                           |                           |
 
-
-## Build on linux / macos
-- npm version: 9.7.2
-- npx version: 9.7.2
-
-```bash
-npm i
-npx webpack
-```
-
 ## Installation
 1. Download the latest version from [Firefox Add-ons](https://addons.mozilla.org/en-US/firefox/addon/youtube-unlocker-yu/).
 2. Load the extension in Firefox via `about:addons`.
